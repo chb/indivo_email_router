@@ -1,0 +1,84 @@
+"""
+.. module:: settings
+   :synopsis: Configuration settings for the Indivo Email Router app
+
+.. moduleauthor:: Daniel Haas <daniel.haas@post.harvard.edu>
+
+"""
+# Application Settings
+APP_HOME = "/PATH/TO/indivo_email_router"
+EMAIL_POLL_INTERVAL = 10 # seconds between checks for new emails.
+
+INDIVO_SERVER_LOCATION = {'scheme': 'http', 'host': 'localhost', 'port': '8000'}
+INDIVO_SERVER_OAUTH = {'consumer_key': 'YOUR_KEY', 'consumer_secret': 'YOUR_SECRET'}
+
+# Celery Settings
+RABBITMQ_USER = "indivo_email_router"
+RABBITMQ_PASSWORD = "YOUR_PASSWORD"
+RABBITMQ_VHOST = "indivo_messages"
+
+# Admin Notification Settings
+ADMINS = ( # Admins to notify when email routing fails
+    ("John Doe", "johndoe@emailprovider.com"),
+)
+
+SEND_MAIL = False # Whether to notify admins when email routing fails
+SERVER_EMAIL = "indivo_email_router@YOUR_SERVER.org" # The from: account for notification emails
+EMAIL_HOST = "mail.YOUR_SERVER.org" # The mailserver host
+EMAIL_PORT = 25 # The mailserver port
+EMAIL_HOST_USER = "" # If required, credentials to access the mailserver
+EMAIL_HOST_PASSWORD = ""
+EMAIL_USE_SSL = False # If desired, encryption settings for outgoing mail
+EMAIL_USE_TLS = False # If desired, encryption settings for outgoing mail
+
+# Django Settings
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
+MANAGERS = ADMINS
+
+DATABASES = {
+    'default':{
+        'ENGINE': 'sqlite3',
+        'NAME': '%s/sqlite/db'%APP_HOME,
+        },
+    }
+
+# Local time zone for this installation. Choices can be found here:
+# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
+# although not all choices may be available on all operating systems.
+# If running in a Windows environment this must be set to the same as your
+# system time zone.
+TIME_ZONE = 'UTC'
+
+# Language code for this installation. All choices can be found here:
+# http://www.i18nguy.com/unicode/language-identifiers.html
+LANGUAGE_CODE = 'en-us'
+
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = 'e7^o7-%74eov^a!&9=9&)()%&_4%!bv*@01&z+^z&36@nnj=7w'
+
+# List of callables that know how to import templates from various sources.
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.load_template_source',
+    'django.template.loaders.app_directories.load_template_source',
+)
+
+MIDDLEWARE_CLASSES = (
+    'django.middleware.common.CommonMiddleware',
+)
+
+ROOT_URLCONF = 'urls'
+
+TEMPLATE_DIRS = (
+    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+    APP_HOME + "/templates"
+)
+
+INSTALLED_APPS = (
+    'django.contrib.contenttypes',
+    'email_router',
+)
+
+

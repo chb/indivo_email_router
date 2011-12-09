@@ -1,0 +1,20 @@
+#! /bin/bash
+
+USAGE="Usage: routerctl COMMAND
+\nControl the Indivo Email Router app.
+\nCOMMAND should be one of:
+\n\t'start': start the email router
+\n\t'stop': stop the email router
+\n\t'restart': restart the email router. Required after changes to celery config.
+\nThis script will require root priveleges to run."
+
+VALID_OPS=('start' 'stop' 'restart')
+OPERATION=$1
+IS_VALID=`echo ${VALID_OPS[*]} | grep $OPERATION`
+
+if [ -z "$IS_VALID" ]; then
+    echo -e $USAGE
+else
+    sudo service celeryd $OPERATION
+    sudo service celerybeat $OPERATION
+fi

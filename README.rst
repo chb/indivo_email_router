@@ -18,44 +18,44 @@ Installation
 
   * Install the package::
 
-    wget http://www.rabbitmq.com/releases/rabbitmq-server/v2.7.0/rabbitmq-server_2.7.0-1_all.deb
-    dpkg -i rabbitmq-server_2.7.0-1_all.deb
-    rm rabbitmq-server_2.7.0-1_all.deb
+      wget http://www.rabbitmq.com/releases/rabbitmq-server/v2.7.0/rabbitmq-server_2.7.0-1_all.deb
+      dpkg -i rabbitmq-server_2.7.0-1_all.deb
+      rm rabbitmq-server_2.7.0-1_all.deb
    
   * Add the indivo_email_router user and pick a password (you'll need to update ``settings.RABBITMQ_USER`` and
     ``settings.RABBITMQ_PASSWORD`` to match these later, so don't forget them)::
   
-    sudo rabbitmqctl add_user indivo_email_router YOUR_PASSWORD
+      sudo rabbitmqctl add_user indivo_email_router YOUR_PASSWORD
 
   * Add a rabbitmq virtual host to use (corresponding to ``settings.RABBITMQ_VHOST``)::
 
-    sudo rabbitmqctl add_vhost indivo_messages
+      sudo rabbitmqctl add_vhost indivo_messages
 
   * Set permissions for the indivo_email_router user in the virtual host::
   
-    sudo rabbitmqctl set_permissions -p myvhost myuser ".*" ".*" ".*"
+      sudo rabbitmqctl set_permissions -p myvhost myuser ".*" ".*" ".*"
 
   * Make sure rabbitmq is running::
   
-    sudo rabbitmq-server
+      sudo rabbitmq-server
   
 * Celery v2.4.5:
 
   * Install the package::
 
-    sudo easy_install -U celery
+      sudo easy_install -U celery
 
   * Set up a celery user/group::
   
-    sudo useradd celery
+      sudo useradd celery
 
   * Copy init_scripts/configuration.default to init_scripts/contifuration and edit,
-    setting INDIVO_EMAIL_ROUTER_HOME to the full path to your installation.
+    setting ``INDIVO_EMAIL_ROUTER_HOME`` to the full path to your installation.
 
   * Copy init scripts over to your machine (UBUNTU SPECIFIC)::
   
-    sudo cp init_scripts/celery* /etc/init.d/
-    sudo cp init_scripts/configuration /etc/default/celeryd
+      sudo cp init_scripts/celery* /etc/init.d/
+      sudo cp init_scripts/configuration /etc/default/celeryd
 
 * Indivo Integration:
 
@@ -94,8 +94,8 @@ Running the Email Router
   http://wiki.chip.org/indivo/index.php/HOWTO:_install_Indivo_X#Running_on_Apache ), or run the Django 
   development servers::
 
-  python manage.py runserver 8003
+    python manage.py runserver 8003
 
 * Start the message poller::
 
-  ./routerctl start
+    ./routerctl start

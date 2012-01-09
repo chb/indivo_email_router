@@ -12,6 +12,17 @@ EMAIL_POLL_INTERVAL = 10 # seconds between checks for new emails.
 INDIVO_SERVER_LOCATION = {'scheme': 'http', 'host': 'localhost', 'port': '8000'}
 INDIVO_SERVER_OAUTH = {'consumer_key': 'YOUR_KEY', 'consumer_secret': 'YOUR_SECRET'}
 
+INBOUND_MAIL_SERVER_SETTINGS = {
+    'host':'inboundmailserver.example.com',
+    'port':'', # empty string for default port (default depends on protocol)
+    'protocol': 'imap', # Options are 'imap', 'imap_ssl'
+    'user':'inboundmailuser',
+    'password': 'inboundmailpassword',
+    'mailbox':'INBOX', # The mailbox to monitor for new messages. Defaults to INBOX
+    'accepted_senders':[ # A list of email addresses to accept mail from. If empty, any sender is accepted
+        ],
+    }
+
 # Celery Settings
 RABBITMQ_USER = "indivo_email_router"
 RABBITMQ_PASSWORD = "YOUR_PASSWORD"

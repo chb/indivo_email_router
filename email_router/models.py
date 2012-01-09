@@ -7,6 +7,7 @@
 """
 
 from django.db import models
+from urlparse import parse_qs
 
 # generate the right meta class
 APP_LABEL = 'email_router'
@@ -17,6 +18,12 @@ class AccessToken(models.Model):
 
   def __str__(self):
     return self.token_string
+
+  @property
+  def parsed(self):
+    p = parse_qs(self.token_string)
+    return dict( [(k,v) if len(v) > 1 else (k, v[0])
+                  for k,v in p.items()])
 
   class Meta:
     app_label = APP_LABEL

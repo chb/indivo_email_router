@@ -220,7 +220,6 @@ def get_record_from_email(parsed_email):
     The implementation is also limited to one address in the TO: field of incoming emails.
 
     """
-    return '83ed6cf8-d236-45b8-8301-ca2162791717'
     
     # Note: this won't work if there are multiple TO addresses. Consider building in the logic to handle that case.
     to_address = email.utils.parseaddr(parsed_email.get('To'))[1]

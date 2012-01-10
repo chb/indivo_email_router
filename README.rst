@@ -52,10 +52,11 @@ Installation
   * Copy init_scripts/configuration.default to init_scripts/contifuration and edit,
     setting ``INDIVO_EMAIL_ROUTER_HOME`` to the full path to your installation.
 
-  * Copy init scripts over to your machine (UBUNTU SPECIFIC)::
+  * Copy init scripts over to your machine (UBUNTU SPECIFIC), and make sure they are executable::
   
       sudo cp init_scripts/celery* /etc/init.d/
       sudo cp init_scripts/configuration /etc/default/celeryd
+      sudo chmod +x /etc/init.d/celery*
 
 * Indivo Integration:
 
@@ -89,6 +90,11 @@ Running the Email Router
   * ``INDIVO_SERVER_OAUTH``: The credentials to connect as the indivo_email_router app.
 
   * ``RABBITMQ_*``: The user, password, and virtual host you set up for rabbitmq above
+
+* Reset the database (This will destory all data, only do it the first time) ::
+
+    rm sqlite/db
+    python manage.py syncdb
 
 * Set up Apache to serve the Django application (similar to Indivo, see 
   http://wiki.chip.org/indivo/index.php/HOWTO:_install_Indivo_X#Running_on_Apache ), or run the Django 
